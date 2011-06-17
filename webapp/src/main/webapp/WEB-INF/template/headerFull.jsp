@@ -107,6 +107,13 @@
 			<span id="userHelp">
 				<a href='<%= request.getContextPath() %>/help.htm'><spring:message code="header.help"/></a>
 			</span>
+                        
+                        <span id="searchBox" style="display:inline;">
+                                <form action="search.htm" method="GET" style="display:inline;">
+                                        <input type="text" id="searchQuery" name="q"/>
+                                        <input type="submit" id="searchSubmit" name="submit" value="<spring:message code="Search.search"/>"/>
+                                </form>
+                        </span>
 		</div>
 
 		<%@ include file="/WEB-INF/template/banner.jsp" %>
