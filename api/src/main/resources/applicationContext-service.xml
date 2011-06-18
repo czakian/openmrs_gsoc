@@ -92,6 +92,7 @@
         <property name="messageSourceService"><ref bean="messageSourceService"/></property>
         <property name="activeListService"><ref bean="activeListService"/></property>
         <property name="visitService"><ref bean="visitService"/></property>
+        <property name="searchService"><ref bean="searchService"/></property>
 	</bean>	
 	
 	<bean id="context" class="org.openmrs.api.context.Context">
@@ -176,7 +177,10 @@
 	</bean>
 	<bean id="visitDAO" class="org.openmrs.api.db.hibernate.HibernateVisitDAO">
         <property name="sessionFactory"><ref bean="sessionFactory"/></property>
-    </bean>
+  </bean>
+  <bean id="searchDAO" class="org.openmrs.api.db.hibernate.HibernateSearchDAO">
+    <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+  </bean>
 	
 
 	<!--  **************************  SCHEDULER SERVICE  *************************  -->
@@ -253,7 +257,9 @@
 	<bean id="visitServiceTarget" class="org.openmrs.api.impl.VisitServiceImpl">
         <property name="visitDAO"><ref bean="visitDAO"/></property>
 	</bean>
-	
+	<bean id="searchServiceTarget" class="org.openmrs.api.impl.SearchServiceImpl">
+	 <property name="searchDAO"><ref bean="searchDAO"/></property>
+	</bean>
 	
 	<!-- Cohort Service setup -->
 	<bean id="cohortServiceTarget" class="org.openmrs.api.impl.CohortServiceImpl">
@@ -575,6 +581,13 @@
 	        <ref local="serviceInterceptors"/>
 	    </property>
 	    <property name="transactionAttributeSource"><ref local="transactionAttributeSource"/></property>
+    </bean>
+    <bean id="searchService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+      <property name="transactionManager"><ref local="transactionManager"/></property>
+      <property name="target"><ref local="searchServiceTarget"/></property>
+      <property name="preInterceptors"><ref local="serviceInterceptors"/></property>
+		<property name="transactionAttributeSource"><ref local="transactionAttributeSource" /></property>
+      <!-- eventually the parser goes here! :D -->
     </bean>
 	
 	

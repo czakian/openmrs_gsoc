@@ -21,6 +21,9 @@ import java.util.Vector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Field;
 import org.openmrs.api.APIException;
 
 /**
@@ -29,6 +32,7 @@ import org.openmrs.api.APIException;
  * 
  * @version 2.0
  */
+@Indexed
 public class Patient extends Person implements java.io.Serializable {
 	
 	public static final long serialVersionUID = 93123L;
@@ -38,7 +42,7 @@ public class Patient extends Person implements java.io.Serializable {
 	// Fields
 	
 	// private Person person;
-	
+	@Field
 	private Integer patientId;
 	
 	private Set<PatientIdentifier> identifiers;

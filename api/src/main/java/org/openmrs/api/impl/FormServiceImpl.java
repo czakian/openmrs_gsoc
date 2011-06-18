@@ -593,7 +593,7 @@ public class FormServiceImpl extends BaseOpenmrsService implements FormService {
 	 *      java.util.Collection, java.lang.Boolean, java.util.Collection, java.util.Collection,
 	 *      java.util.Collection)
 	 */
-	public Integer getFormCount(String partialName, Boolean published, Collection<EncounterType> encounterTypes,
+	public Long getFormCount(String partialName, Boolean published, Collection<EncounterType> encounterTypes,
 	        Boolean retired, Collection<FormField> containingAnyFormField, Collection<FormField> containingAllFormFields,
 	        Collection<Field> fields) {
 		

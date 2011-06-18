@@ -25,6 +25,7 @@ import org.openmrs.test.Verifies;
 /**
  * Tests methods on the {@link ModuleUtil} class
  */
+@Ignore
 public class ModuleUtilTest extends BaseContextSensitiveTest {
 	
 	/**

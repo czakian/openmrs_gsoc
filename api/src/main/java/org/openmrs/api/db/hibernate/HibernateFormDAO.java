@@ -375,7 +375,7 @@ public class HibernateFormDAO implements FormDAO {
 	 *      java.util.Collection, java.lang.Boolean, java.util.Collection, java.util.Collection,
 	 *      java.util.Collection)
 	 */
-	public Integer getFormCount(String partialName, Boolean published, Collection<EncounterType> encounterTypes,
+	public Long getFormCount(String partialName, Boolean published, Collection<EncounterType> encounterTypes,
 	        Boolean retired, Collection<FormField> containingAnyFormField, Collection<FormField> containingAllFormFields,
 	        Collection<Field> fields) throws DAOException {
 		
@@ -384,7 +384,7 @@ public class HibernateFormDAO implements FormDAO {
 		
 		crit.setProjection(Projections.count("formId"));
 		
-		return (Integer) crit.uniqueResult();
+		return (Long) crit.uniqueResult();
 	}
 	
 	/**

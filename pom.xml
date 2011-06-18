@@ -238,11 +238,17 @@
 				<artifactId>cglib-nodep</artifactId>
 				<version>2.2</version>
 			</dependency>
-
+      <dependency>
+        <groupId>javassist</groupId>
+        <artifactId>javassist</artifactId>
+        <version>3.12.1.GA</version>
+      </dependency>
 			<dependency>
 				<groupId>org.openmrs.hibernate</groupId>
-				<artifactId>hibernate</artifactId>
-				<version>3.2.5.ga-mod</version>
+				<artifactId>hibernate-core</artifactId>
+				<version>3.6.5.Final-mod</version>
+				<scope>system</scope>
+				<systemPath>/home/czakian/.m2/repository/org/openmrs/hibernate/hibernate-core/3.6.5.Final-mod/hibernate-core-3.6.5.Final-mod.jar</systemPath>
 				<exclusions>
 					<exclusion>
 						<groupId>commons-logging</groupId>
@@ -262,6 +268,80 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+			<dependency>
+   <groupId>org.hibernate</groupId>
+   <artifactId>hibernate-search-analyzers</artifactId>
+   <version>3.4.0.Final</version>
+    </dependency>
+			<dependency>
+			<groupId>org.hibernate</groupId>
+        <artifactId>hibernate-c3p0</artifactId>
+        <version>3.6.0.Final</version>
+        <exclusions>
+          <exclusion>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>asm</groupId>
+            <artifactId>asm-attrs</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency> 
+			<groupId>org.hibernate</groupId>
+        <artifactId>hibernate-ehcache</artifactId>
+        <version>3.6.0.Final</version>
+        <exclusions>
+          <exclusion>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>asm</groupId>
+            <artifactId>asm-attrs</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency> 
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-search</artifactId>
+        <version>3.4.0.Final</version>
+        <exclusions>
+          <exclusion>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>asm</groupId>
+            <artifactId>asm-attrs</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
 			<dependency>
 				<groupId>org.openmrs.liquibase</groupId>
 				<artifactId>liquibase-core</artifactId>
@@ -688,6 +768,11 @@
 			<name>OpenMRS Nexus Repository</name>
 			<url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
 		</repository>
+		 <repository>
+            <id>JBOSS</id>
+            <name>JBoss Repository</name>
+            <url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+        </repository>
 	</repositories>
 
 	<pluginRepositories>

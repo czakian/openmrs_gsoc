@@ -662,7 +662,7 @@ public interface EncounterService extends OpenmrsService {
 	 */
 	@Transactional(readOnly = true)
 	@Authorized( { PrivilegeConstants.VIEW_ENCOUNTERS })
-	public Integer getCountOfEncounters(String query, boolean includeVoided);
+	public Long getCountOfEncounters(String query, boolean includeVoided);
 	
 	/**
 	 * Gets all encounters grouped within a given visit.

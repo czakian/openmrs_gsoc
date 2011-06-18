@@ -192,7 +192,7 @@ public interface FormService extends OpenmrsService {
 	 */
 	@Transactional(readOnly = true)
 	@Authorized(PrivilegeConstants.VIEW_FORMS)
-	public Integer getFormCount(String partialNameSearch, Boolean published, Collection<EncounterType> encounterTypes,
+	public Long getFormCount(String partialNameSearch, Boolean published, Collection<EncounterType> encounterTypes,
 	        Boolean retired, Collection<FormField> containingAnyFormField, Collection<FormField> containingAllFormFields,
 	        Collection<Field> fields);
 	

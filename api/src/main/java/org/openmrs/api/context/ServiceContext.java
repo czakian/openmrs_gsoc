@@ -43,6 +43,7 @@ import org.openmrs.api.PatientSetService;
 import org.openmrs.api.PersonService;
 import org.openmrs.api.ProgramWorkflowService;
 import org.openmrs.api.ReportService;
+import org.openmrs.api.SearchService;
 import org.openmrs.api.SerializationService;
 import org.openmrs.api.UserService;
 import org.openmrs.api.VisitService;
@@ -174,6 +175,17 @@ public class ServiceContext implements ApplicationContextAware {
 			log.debug("Destroying ServiceContext instance: " + instance);
 		
 		instance = null;
+	}
+	
+	/*
+	 * @return search service for full text searching
+	 */
+	public SearchService getSearchService() {
+		return getService(SearchService.class);
+	}
+	
+	public void setSearchService(SearchService ss) {
+		setService(SearchService.class, ss);
 	}
 	
 	/**

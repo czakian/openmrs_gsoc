@@ -593,7 +593,7 @@ public class EncounterServiceImpl extends BaseOpenmrsService implements Encounte
 	 * @see org.openmrs.api.EncounterService#getCountOfEncounters(java.lang.String, boolean)
 	 */
 	@Override
-	public Integer getCountOfEncounters(String query, boolean includeVoided) {
+	public Long getCountOfEncounters(String query, boolean includeVoided) {
 		return dao.getCountOfEncounters(query, includeVoided);
 	}
 	

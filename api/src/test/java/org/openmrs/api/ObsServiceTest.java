@@ -745,7 +745,7 @@ public class ObsServiceTest extends BaseContextSensitiveTest {
 	public void getObservationCount_shouldGetCountOfObsAssignedToGivenEncounters() throws Exception {
 		ObsService obsService = Context.getObsService();
 		
-		Integer count = obsService.getObservationCount(null, Collections.singletonList(new Encounter(4)), null, null, null,
+		Long count = obsService.getObservationCount(null, Collections.singletonList(new Encounter(4)), null, null, null,
 		    null, null, null, null, false);
 		
 		Assert.assertEquals(6, count.intValue());
@@ -779,8 +779,8 @@ public class ObsServiceTest extends BaseContextSensitiveTest {
 		
 		ObsService obsService = Context.getObsService();
 		
-		Integer count = obsService.getObservationCount(null, null, null, Collections.singletonList(new Concept(7)), null,
-		    null, null, null, null, false);
+		Long count = obsService.getObservationCount(null, null, null, Collections.singletonList(new Concept(7)), null, null,
+		    null, null, null, false);
 		
 		Assert.assertEquals(1, count.intValue());
 		
@@ -808,7 +808,7 @@ public class ObsServiceTest extends BaseContextSensitiveTest {
 	public void getObservationCount_shouldGetCountOfObsWithQuestionConceptInGivenQuestionsParameter() throws Exception {
 		ObsService obsService = Context.getObsService();
 		
-		Integer count = obsService.getObservationCount(null, null, Collections.singletonList(new Concept(5497)), null, null,
+		Long count = obsService.getObservationCount(null, null, Collections.singletonList(new Concept(5497)), null, null,
 		    null, null, null, null, false);
 		
 		Assert.assertEquals(2, count.intValue());
@@ -843,8 +843,8 @@ public class ObsServiceTest extends BaseContextSensitiveTest {
 		
 		ObsService obsService = Context.getObsService();
 		
-		Integer obss = obsService.getObservationCount(Collections.singletonList(new Person(9)), null, null, null, null,
-		    null, null, null, null, true);
+		Long obss = obsService.getObservationCount(Collections.singletonList(new Person(9)), null, null, null, null, null,
+		    null, null, null, true);
 		
 		Assert.assertEquals(2, obss.intValue());
 		
@@ -895,8 +895,8 @@ public class ObsServiceTest extends BaseContextSensitiveTest {
 		
 		ObsService obsService = Context.getObsService();
 		
-		Integer obss = obsService.getObservationCount(Collections.singletonList(new Person(9)), null, null, null, null,
-		    null, null, null, null, false);
+		Long obss = obsService.getObservationCount(Collections.singletonList(new Person(9)), null, null, null, null, null,
+		    null, null, null, false);
 		
 		Assert.assertEquals(1, obss.intValue());
 	}
@@ -927,8 +927,8 @@ public class ObsServiceTest extends BaseContextSensitiveTest {
 		
 		ObsService obsService = Context.getObsService();
 		
-		Integer count = obsService.getObservationCount(null, null, null, null, null, null, 2 /*obsGroupId*/, null, null,
-		    false);
+		Long count = obsService
+		        .getObservationCount(null, null, null, null, null, null, 2 /*obsGroupId*/, null, null, false);
 		
 		Assert.assertEquals(1, count.intValue());
 	}
@@ -959,8 +959,8 @@ public class ObsServiceTest extends BaseContextSensitiveTest {
 		
 		ObsService obsService = Context.getObsService();
 		
-		Integer count = obsService.getObservationCount(null, null, null, null, Collections
-		        .singletonList(PERSON_TYPE.PATIENT), null, null, null, null, false);
+		Long count = obsService.getObservationCount(null, null, null, null, Collections.singletonList(PERSON_TYPE.PATIENT),
+		    null, null, null, null, false);
 		
 		Assert.assertEquals(13, count.intValue());
 	}
@@ -991,8 +991,8 @@ public class ObsServiceTest extends BaseContextSensitiveTest {
 		
 		ObsService obsService = Context.getObsService();
 		
-		Integer count = obsService.getObservationCount(null, null, null, null,
-		    Collections.singletonList(PERSON_TYPE.PERSON), null, null, null, null, false);
+		Long count = obsService.getObservationCount(null, null, null, null, Collections.singletonList(PERSON_TYPE.PERSON),
+		    null, null, null, null, false);
 		
 		Assert.assertEquals(15, count.intValue());
 	}
@@ -1023,7 +1023,7 @@ public class ObsServiceTest extends BaseContextSensitiveTest {
 		
 		ObsService obsService = Context.getObsService();
 		
-		Integer count = obsService.getObservationCount(null, null, null, null, Collections.singletonList(PERSON_TYPE.USER),
+		Long count = obsService.getObservationCount(null, null, null, null, Collections.singletonList(PERSON_TYPE.USER),
 		    null, null, null, null, false);
 		
 		Assert.assertEquals(1, count.intValue());
@@ -1051,8 +1051,8 @@ public class ObsServiceTest extends BaseContextSensitiveTest {
 	public void getObservationCount_shouldReturnCountOfObsWithLocationInGivenLocationsParameter() throws Exception {
 		ObsService obsService = Context.getObsService();
 		
-		Integer count = obsService.getObservationCount(null, null, null, null, null, Collections.singletonList(new Location(
-		        1)), null, null, null, false);
+		Long count = obsService.getObservationCount(null, null, null, null, null,
+		    Collections.singletonList(new Location(1)), null, null, null, false);
 		
 		Assert.assertEquals(8, count.intValue());
 	}

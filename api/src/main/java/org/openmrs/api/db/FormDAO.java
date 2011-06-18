@@ -243,7 +243,7 @@ public interface FormDAO {
 	/**
 	 * @see #getForms(String, Boolean, Collection, Boolean, Collection, Collection, Collection)
 	 */
-	public Integer getFormCount(String partialName, Boolean published, Collection<EncounterType> encounterTypes,
+	public Long getFormCount(String partialName, Boolean published, Collection<EncounterType> encounterTypes,
 	        Boolean retired, Collection<FormField> containingAnyFormField, Collection<FormField> containingAllFormFields,
 	        Collection<Field> fields) throws DAOException;
 	

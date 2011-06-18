@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
-
-<hibernate-mapping package="org.openmrs">
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+    <hibernate-mapping package="org.openmrs">
 
     <class name="VisitAttribute" table="visit_attribute">
 
@@ -18,7 +18,7 @@
         <many-to-one name="attributeType" class="VisitAttributeType" not-null="true" column="attribute_type_id" />
         
         <!-- TODO CHECK LENGTH -->
-        <property name="serializedValue" type="text" not-null="true" column="serialized_value" length="16777215" />
+        <property name="serializedValue" type="materialized_clob" not-null="true" column="serialized_value" length="16777215" />
         
         <many-to-one name="creator" class="User" not-null="true" column="creator" />
         

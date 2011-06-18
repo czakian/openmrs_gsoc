@@ -447,7 +447,7 @@ public interface ObsService extends OpenmrsService {
 	 */
 	@Transactional(readOnly = true)
 	@Authorized(PrivilegeConstants.VIEW_OBS)
-	public Integer getObservationCount(List<Person> whom, List<Encounter> encounters, List<Concept> questions,
+	public Long getObservationCount(List<Person> whom, List<Encounter> encounters, List<Concept> questions,
 	        List<Concept> answers, List<PERSON_TYPE> personTypes, List<Location> locations, Integer obsGroupId,
 	        Date fromDate, Date toDate, boolean includeVoidedObs) throws APIException;
 	
@@ -707,5 +707,5 @@ public interface ObsService extends OpenmrsService {
 	 */
 	@Transactional(readOnly = true)
 	@Authorized(PrivilegeConstants.VIEW_OBS)
-	public Integer getObservationCount(List<ConceptName> conceptNames, boolean includeVoided);
+	public Long getObservationCount(List<ConceptName> conceptNames, boolean includeVoided);
 }

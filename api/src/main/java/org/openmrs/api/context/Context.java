@@ -52,6 +52,7 @@ import org.openmrs.api.PatientSetService;
 import org.openmrs.api.PersonService;
 import org.openmrs.api.ProgramWorkflowService;
 import org.openmrs.api.ReportService;
+import org.openmrs.api.SearchService;
 import org.openmrs.api.SerializationService;
 import org.openmrs.api.UserService;
 import org.openmrs.api.VisitService;
@@ -344,6 +345,10 @@ public class Context {
 	 */
 	public static void setRuntimeProperties(Properties props) {
 		runtimeProperties = props;
+	}
+	
+	public static SearchService getSearchService() {
+		return getServiceContext().getSearchService();
 	}
 	
 	/**

@@ -960,7 +960,7 @@ public interface PatientService extends OpenmrsService {
 	 */
 	@Transactional(readOnly = true)
 	@Authorized( { PrivilegeConstants.VIEW_PATIENTS })
-	public Integer getCountOfPatients(String query);
+	public Long getCountOfPatients(String query);
 	
 	/**
 	 * Get a limited size of patients from a given start index based on given criteria The
