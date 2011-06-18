@@ -59,9 +59,7 @@ public class Person extends BaseOpenmrsData implements java.io.Serializable {
 	@Field
 	protected Integer personId;
 	
-	@FieldBridge(
-			impl=SetBridge.class
-			)
+	@FieldBridge(impl = SetBridge.class)
 	private Set<PersonAddress> addresses = null;
 	
 	private Set<PersonName> names = null;
