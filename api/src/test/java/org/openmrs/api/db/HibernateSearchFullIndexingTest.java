@@ -52,27 +52,23 @@ public class HibernateSearchFullIndexingTest extends BaseContextSensitiveTest {
 	@Verifies(value = "should find indexed items with fieldbridge", method = "search(String param);>,null")
 	public void search_shouldfindindexeditemwithfieldbridge() {
 		dao.openFullTextSession();
-		List result = dao.search("Collet", Person.class, new String[] { "names.givenName" });
-		System.out.println("above for loop");
+		List result = dao.search("M*", Person.class, new String[] { "names.givenName", "names.prefix" });
 		for (Object s : result) {
-			if(s.getClass().equals(PersonName.class)) {
-			PersonName pname = (PersonName) s;
-			System.out.print(pname.getId() + " ");
-			System.out.print(pname.getDegree() + " ");
-			System.out.println(pname.getFullName() + " ");
+			if (s.getClass().equals(PersonName.class)) {
+				PersonName pname = (PersonName) s;
+				System.out.print(pname.getId() + " ");
+				System.out.print(pname.getDegree() + " ");
+				System.out.println(pname.getFullName() + " ");
 			} else if (s.getClass().equals(Patient.class)) {
-			Patient pname = (Patient) s;
-			System.out.print(pname.getId() + " ");
-			System.out.print(pname.getGivenName() + " ");
-			System.out.println(pname.getFamilyName());
-			} else if(s.getClass().equals(Person.class)) {
-			Person pname = (Person) s;
-			System.out.print(pname.getId() + " ");
-			System.out.print(pname.getGivenName() + " ");
-			System.out.println(pname.getFamilyName());
-
-				
-			
+				Patient pname = (Patient) s;
+				System.out.print(pname.getId() + " ");
+				System.out.print(pname.getGivenName() + " ");
+				System.out.println(pname.getFamilyName());
+			} else if (s.getClass().equals(Person.class)) {
+				Person pname = (Person) s;
+				System.out.print(pname.getId() + " ");
+				System.out.print(pname.getGivenName() + " ");
+				System.out.println(pname.getFamilyName());
 			}
 		}
 		Assert.assertNotNull(result);

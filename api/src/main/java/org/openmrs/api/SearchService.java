@@ -33,4 +33,7 @@ public interface SearchService extends OpenmrsService {
 	
 	//@Transactional
 	public List search();
+	
+	public List search(String param, Class clazz, String[] fields);
+	
 }
