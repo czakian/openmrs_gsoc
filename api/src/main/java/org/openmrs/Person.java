@@ -24,13 +24,17 @@ import java.util.Vector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.FieldBridge;
-import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.annotations.Store;
 import org.openmrs.api.UserService;
-import org.openmrs.api.search.SetBridge;
+import org.openmrs.api.search.PersonAddressSetBridge;
+import org.openmrs.api.search.PersonNameSetBridge;
 import org.openmrs.util.OpenmrsUtil;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
@@ -59,9 +63,12 @@ public class Person extends BaseOpenmrsData implements java.io.Serializable {
 	@Field
 	protected Integer personId;
 	
-	@FieldBridge(impl = SetBridge.class)
+	@FieldBridge(impl = PersonAddressSetBridge.class)
 	private Set<PersonAddress> addresses = null;
 	
+	//@FieldBridge(impl = PersonNameSetBridge.class)
+	@IndexedEmbedded
+	@ContainedIn
 	private Set<PersonName> names = null;
 	
 	private Set<PersonAttribute> attributes = null;

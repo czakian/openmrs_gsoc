@@ -21,6 +21,10 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.search.annotations.ContainedIn;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.IndexedEmbedded;
 import org.openmrs.util.OpenmrsConstants;
 import org.openmrs.util.OpenmrsUtil;
 import org.simpleframework.xml.Attribute;
@@ -40,26 +44,38 @@ public class PersonName extends BaseOpenmrsData implements java.io.Serializable,
 	
 	// Fields
 	
+	@Field
 	private Integer personNameId;
 	
+	//	@IndexedEmbedded
 	private Person person;
 	
+	@Field
 	private Boolean preferred = false;
 	
+	@Field(index = Index.TOKENIZED)
 	private String prefix;
 	
+	@Field(index = Index.TOKENIZED)
+	@ContainedIn
 	private String givenName;
 	
+	@Field(index = Index.TOKENIZED)
 	private String middleName;
 	
+	@Field(index = Index.TOKENIZED)
 	private String familyNamePrefix;
 	
+	@Field(index = Index.TOKENIZED)
 	private String familyName;
 	
+	@Field(index = Index.TOKENIZED)
 	private String familyName2;
 	
+	@Field(index = Index.TOKENIZED)
 	private String familyNameSuffix;
 	
+	@Field(index = Index.TOKENIZED)
 	private String degree;
 	
 	// Constructors
@@ -75,7 +91,7 @@ public class PersonName extends BaseOpenmrsData implements java.io.Serializable,
 	
 	/**
 	 * Convenience constructor with the basic requirements
-	 * 
+	 *
 	 * @param givenName String this person's first name
 	 * @param middleName String this person's middle name
 	 * @param familyName String this person's last name
@@ -88,7 +104,7 @@ public class PersonName extends BaseOpenmrsData implements java.io.Serializable,
 	
 	/**
 	 * Compares two objects for similarity
-	 * 
+	 *
 	 * @param obj PersonName to compare to
 	 * @return boolean true/false whether or not they are the same objects
 	 * @see java.lang.Object#equals(java.lang.Object)
@@ -127,7 +143,7 @@ public class PersonName extends BaseOpenmrsData implements java.io.Serializable,
 	 * {@link #equals(Object)} in that this method compares the inner fields of each name for
 	 * equality. Note: Null/empty fields on <code>otherName</code> /will not/ cause a false value to
 	 * be returned
-	 * 
+	 *
 	 * @param otherName PersonName with which to compare
 	 * @return boolean true/false whether or not they are the same names
 	 * @should return true if given middle and family name are equal
@@ -171,7 +187,7 @@ public class PersonName extends BaseOpenmrsData implements java.io.Serializable,
 	/**
 	 * bitwise copy of the personName object. NOTICE: THIS WILL NOT COPY THE PATIENT OBJECT. The
 	 * PersonName.person object in this object AND the cloned object will point at the same person
-	 * 
+	 *
 	 * @return New PersonName object
 	 * @should copy every property of given personName
 	 */
@@ -220,7 +236,7 @@ public class PersonName extends BaseOpenmrsData implements java.io.Serializable,
 	
 	/**
 	 * This still exists on PersonName for the SimpleFramework annotation
-	 * 
+	 *
 	 * @return Returns the dateVoided.
 	 */
 	@Element(required = false)
@@ -449,7 +465,7 @@ public class PersonName extends BaseOpenmrsData implements java.io.Serializable,
 	
 	/**
 	 * This still exists on PersonName for the SimpleFramework annotation
-	 * 
+	 *
 	 * @param voided The voided to set.
 	 */
 	@Attribute(required = true)
@@ -459,7 +475,7 @@ public class PersonName extends BaseOpenmrsData implements java.io.Serializable,
 	
 	/**
 	 * This still exists on PersonName for the SimpleFramework annotation
-	 * 
+	 *
 	 * @return Returns the voidedBy.
 	 */
 	@Element(required = false)
@@ -469,7 +485,7 @@ public class PersonName extends BaseOpenmrsData implements java.io.Serializable,
 	
 	/**
 	 * This still exists on PersonName for the SimpleFramework annotation
-	 * 
+	 *
 	 * @param voidedBy The voidedBy to set.
 	 */
 	@Element(required = false)
@@ -479,7 +495,7 @@ public class PersonName extends BaseOpenmrsData implements java.io.Serializable,
 	
 	/**
 	 * This still exists on PersonName for the SimpleFramework annotation
-	 * 
+	 *
 	 * @return Returns the voidReason.
 	 */
 	@Element(data = true, required = false)
@@ -489,7 +505,7 @@ public class PersonName extends BaseOpenmrsData implements java.io.Serializable,
 	
 	/**
 	 * This still exists on PersonName for the SimpleFramework annotation
-	 * 
+	 *
 	 * @param voidReason The voidReason to set.
 	 */
 	@Element(data = true, required = false)
@@ -501,7 +517,7 @@ public class PersonName extends BaseOpenmrsData implements java.io.Serializable,
 	 * Convenience method to get all the names of this PersonName and concatonating them together
 	 * with spaces in between. If any part of {@link #getPrefix()}, {@link #getGivenName()},
 	 * {@link #getMiddleName()}, etc are null, they are not included in the returned name
-	 * 
+	 *
 	 * @return all of the parts of this {@link PersonName} joined with spaces
 	 * @should not put spaces around an empty middle name
 	 */
@@ -534,9 +550,9 @@ public class PersonName extends BaseOpenmrsData implements java.io.Serializable,
 	 */
 	@Override
 	public String toString() {
-		// TODO find all uses of this toString() method and 
+		// TODO find all uses of this toString() method and
 		// change them to use the getFullName() method.  This
-		// to string should print out the #getPersonNameId() and 
+		// to string should print out the #getPersonNameId() and
 		// all of the values for each part
 		
 		return getFullName();
@@ -546,7 +562,7 @@ public class PersonName extends BaseOpenmrsData implements java.io.Serializable,
 	 * TODO: the behavior of this method needs to be controlled by some sort of global property
 	 * because an implementation can define how they want their names to look (which fields to
 	 * show/hide)
-	 * 
+	 *
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 * @should return negative if other name is voided
 	 * @should return negative if this name is preferred

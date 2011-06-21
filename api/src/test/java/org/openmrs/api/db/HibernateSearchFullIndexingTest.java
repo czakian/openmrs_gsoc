@@ -5,8 +5,11 @@ import java.util.List;
 import junit.framework.Assert;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.openmrs.Patient;
 import org.openmrs.Person;
+import org.openmrs.PersonName;
 import org.openmrs.api.SearchService;
 import org.openmrs.api.context.Context;
 import org.openmrs.test.BaseContextSensitiveTest;
@@ -41,15 +44,46 @@ public class HibernateSearchFullIndexingTest extends BaseContextSensitiveTest {
 		dao.openFullTextSession();
 		dao.indexExistingData();
 		//need to modify the test to figure out what is in the database now and search for it...
-		System.out.println("yay got here without errors");
+		System.out.println("indexed test data");
 		Assert.assertTrue(true);
 	}
 	
 	@Test
+	@Verifies(value = "should find indexed items with fieldbridge", method = "search(String param);>,null")
+	public void search_shouldfindindexeditemwithfieldbridge() {
+		dao.openFullTextSession();
+		List result = dao.search("Collet", Person.class, new String[] { "names.givenName" });
+		System.out.println("above for loop");
+		for (Object s : result) {
+			if(s.getClass().equals(PersonName.class)) {
+			PersonName pname = (PersonName) s;
+			System.out.print(pname.getId() + " ");
+			System.out.print(pname.getDegree() + " ");
+			System.out.println(pname.getFullName() + " ");
+			} else if (s.getClass().equals(Patient.class)) {
+			Patient pname = (Patient) s;
+			System.out.print(pname.getId() + " ");
+			System.out.print(pname.getGivenName() + " ");
+			System.out.println(pname.getFamilyName());
+			} else if(s.getClass().equals(Person.class)) {
+			Person pname = (Person) s;
+			System.out.print(pname.getId() + " ");
+			System.out.print(pname.getGivenName() + " ");
+			System.out.println(pname.getFamilyName());
+
+				
+			
+			}
+		}
+		Assert.assertNotNull(result);
+	}
+	
+	@Ignore
+	@Test
 	@Verifies(value = "should find indexed existing items with param", method = "search();>,null")
 	public void search_shouldfindindexedexistingitemswithparam() {
 		dao.openFullTextSession();
-		List result = dao.search("5*", Person.class, new String[] { "address" });
+		List result = dao.search("Anet", Person.class, new String[] { "names" });
 		for (Object s : result) {
 			Person p = (Person) s;
 			System.out.print(p.getId() + " ");
@@ -62,6 +96,7 @@ public class HibernateSearchFullIndexingTest extends BaseContextSensitiveTest {
 		Assert.assertNotNull(result);
 	}
 	
+	@Ignore
 	@Test
 	@Verifies(value = "should find indexed existing items", method = "search();>,null")
 	public void search_shouldfindindexedexistingitems() {
@@ -77,4 +112,5 @@ public class HibernateSearchFullIndexingTest extends BaseContextSensitiveTest {
 		}
 		Assert.assertNotNull(result);
 	}
+	
 }
