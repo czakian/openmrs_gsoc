@@ -1579,8 +1579,8 @@ public class ConceptServiceImpl extends BaseOpenmrsService implements ConceptSer
 	public boolean hasAnyObservation(Concept concept) {
 		List<Concept> concepts = new Vector<Concept>();
 		concepts.add(concept);
-		Integer count = Context.getObsService().getObservationCount(null, null, concepts, null, null, null, null, null,
-		    null, true);
+		Long count = Context.getObsService().getObservationCount(null, null, concepts, null, null, null, null, null, null,
+		    true);
 		return count > 0;
 	}
 	
@@ -1607,7 +1607,7 @@ public class ConceptServiceImpl extends BaseOpenmrsService implements ConceptSer
 	public boolean hasAnyObservation(ConceptName conceptName) throws APIException {
 		List<ConceptName> conceptNames = new Vector<ConceptName>();
 		conceptNames.add(conceptName);
-		Integer count = Context.getObsService().getObservationCount(conceptNames, true);
+		Long count = Context.getObsService().getObservationCount(conceptNames, true);
 		return count > 0;
 	}
 	
@@ -1828,7 +1828,7 @@ public class ConceptServiceImpl extends BaseOpenmrsService implements ConceptSer
 	 *      Concept)
 	 */
 	@Override
-	public Integer getCountOfConcepts(String phrase, List<Locale> locales, boolean includeRetired,
+	public Long getCountOfConcepts(String phrase, List<Locale> locales, boolean includeRetired,
 	        List<ConceptClass> requireClasses, List<ConceptClass> excludeClasses, List<ConceptDatatype> requireDatatypes,
 	        List<ConceptDatatype> excludeDatatypes, Concept answersToConcept) {
 		
@@ -1839,7 +1839,7 @@ public class ConceptServiceImpl extends BaseOpenmrsService implements ConceptSer
 	/**
 	 * @see ConceptService#getCountOfDrugs(String, Concept, boolean, boolean, boolean)
 	 */
-	public Integer getCountOfDrugs(String drugName, Concept concept, boolean searchOnPhrase, boolean searchDrugConceptNames,
+	public Long getCountOfDrugs(String drugName, Concept concept, boolean searchOnPhrase, boolean searchDrugConceptNames,
 	        boolean includeRetired) throws APIException {
 		return dao.getCountOfDrugs(drugName, concept, searchOnPhrase, searchDrugConceptNames, includeRetired);
 	}

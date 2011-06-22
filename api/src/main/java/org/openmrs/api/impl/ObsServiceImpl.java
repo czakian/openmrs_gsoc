@@ -312,7 +312,7 @@ public class ObsServiceImpl extends BaseOpenmrsService implements ObsService {
 	 *      java.util.List, java.util.List, java.util.List, java.util.List, java.lang.Integer,
 	 *      java.util.Date, java.util.Date, boolean)
 	 */
-	public Integer getObservationCount(List<Person> whom, List<Encounter> encounters, List<Concept> questions,
+	public Long getObservationCount(List<Person> whom, List<Encounter> encounters, List<Concept> questions,
 	        List<Concept> answers, List<PERSON_TYPE> personTypes, List<Location> locations, Integer obsGroupId,
 	        Date fromDate, Date toDate, boolean includeVoidedObs) throws APIException {
 		return dao.getObservationCount(whom, encounters, questions, answers, personTypes, locations, obsGroupId, fromDate,
@@ -811,7 +811,7 @@ public class ObsServiceImpl extends BaseOpenmrsService implements ObsService {
 	 * @see org.openmrs.api.ObsService#getObservationCount(java.util.List, boolean)
 	 */
 	@Override
-	public Integer getObservationCount(List<ConceptName> conceptNames, boolean includeVoided) {
+	public Long getObservationCount(List<ConceptName> conceptNames, boolean includeVoided) {
 		return dao.getObservationCount(null, null, null, null, null, null, null, null, null, conceptNames, true);
 	}
 	

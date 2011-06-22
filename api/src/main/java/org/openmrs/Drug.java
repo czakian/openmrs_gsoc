@@ -14,30 +14,41 @@
 package org.openmrs;
 
 import java.util.Locale;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Field;
 
 /**
  * Drug
  */
+@Indexed
 public class Drug extends BaseOpenmrsMetadata implements java.io.Serializable {
 	
 	public static final long serialVersionUID = 285L;
 	
 	// Fields
 	
+	@DocumentId
+	@Field
 	private Integer drugId;
 	
+	@Field
 	private Boolean combination = false;
 	
 	private Concept dosageForm;
 	
+	@Field
 	private Double doseStrength;
 	
+	@Field
 	private Double maximumDailyDose;
 	
+	@Field
 	private Double minimumDailyDose;
 	
 	private Concept route;
 	
+	@Field
 	private String units;
 	
 	private Concept concept;

@@ -371,7 +371,7 @@ public interface LocationService extends OpenmrsService {
 	 */
 	@Transactional(readOnly = true)
 	@Authorized( { PrivilegeConstants.VIEW_LOCATIONS })
-	public Integer getCountOfLocations(String nameFragment, Boolean includeRetired);
+	public Long getCountOfLocations(String nameFragment, Boolean includeRetired);
 	
 	/**
 	 * Returns all root locations (i.e. those who have no parentLocation), optionally including retired ones.

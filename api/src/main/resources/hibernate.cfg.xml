@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
-	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
 
 	<session-factory>
+		<!-- Hibernate Search configuration -->
+<property name="hibernate.search.default.directory_provider">
+      org.hibernate.search.store.FSDirectoryProvider
+    </property>
+		<property name="hibernate.search.default.indexBase"> 
+			/home/jkeiper/lucene-index/ 
+		</property>
+
 		<!--  Hibernate Mapping files -->
-		
+
 		<!-- API -->
 		<mapping resource="org/openmrs/api/db/hibernate/ActiveListItem.hbm.xml" />
 		<mapping resource="org/openmrs/api/db/hibernate/ActiveListType.hbm.xml" />
@@ -71,26 +79,26 @@
 		<mapping resource="org/openmrs/hl7/db/hibernate/HL7InQueue.hbm.xml" />
 		<mapping resource="org/openmrs/hl7/db/hibernate/HL7InArchive.hbm.xml" />
 		<mapping resource="org/openmrs/hl7/db/hibernate/HL7InError.hbm.xml" />
-		
+
 		<!-- Reporting -->
 		<mapping resource="org/openmrs/reporting/db/hibernate/Report.hbm.xml" />
 		<mapping resource="org/openmrs/reporting/db/hibernate/ReportObject.hbm.xml" />
 		<mapping resource="org/openmrs/reporting/db/hibernate/ReportSchemaXml.hbm.xml" />
-		
+
 		<!-- Notification -->
 		<mapping resource="org/openmrs/notification/db/hibernate/Template.hbm.xml" />
 		<mapping resource="org/openmrs/notification/db/hibernate/Alert.hbm.xml" />
 		<mapping resource="org/openmrs/notification/db/hibernate/AlertRecipient.hbm.xml" />
-		
+
 		<!-- Scheduler -->
 		<mapping resource="org/openmrs/scheduler/db/hibernate/TaskDefinition.hbm.xml" />
-		
+
 		<!-- Visit -->
 		<mapping resource="org/openmrs/api/db/hibernate/VisitType.hbm.xml" />
 		<mapping resource="org/openmrs/api/db/hibernate/VisitAttributeType.hbm.xml" />
 		<mapping resource="org/openmrs/api/db/hibernate/VisitAttribute.hbm.xml" />
 		<mapping resource="org/openmrs/api/db/hibernate/Visit.hbm.xml" />
 
-  </session-factory>
+	</session-factory>
 
 </hibernate-configuration>

@@ -315,7 +315,7 @@ public class LocationServiceImpl extends BaseOpenmrsService implements LocationS
 	 * @see org.openmrs.api.LocationService#getCountOfLocations(String, Boolean)
 	 */
 	@Override
-	public Integer getCountOfLocations(String nameFragment, Boolean includeRetired) {
+	public Long getCountOfLocations(String nameFragment, Boolean includeRetired) {
 		return dao.getCountOfLocations(nameFragment, includeRetired);
 	}
 	

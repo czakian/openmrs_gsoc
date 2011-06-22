@@ -109,7 +109,13 @@
       <dependency>
          <groupId>org.codehaus.jackson</groupId>
          <artifactId>jackson-mapper-asl</artifactId>
-      </dependency>      
+      </dependency>
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>jcl-over-slf4j</artifactId>
+         <version>1.6.1</version>
+         <type>jar</type>
+      </dependency>
    </dependencies>
 
    <build>

@@ -1390,10 +1390,10 @@ public class PatientServiceImpl extends BaseOpenmrsService implements PatientSer
 	 * @see PatientService#getCountOfPatients(String)
 	 */
 	@Override
-	public Integer getCountOfPatients(String query) {
+	public Long getCountOfPatients(String query) {
 		int count = 0;
 		if (StringUtils.isBlank(query))
-			return count;
+			return (long) count;
 		List<PatientIdentifierType> emptyList = new Vector<PatientIdentifierType>();
 		// if there is a number in the query string
 		if (query.matches(".*\\d+.*")) {
