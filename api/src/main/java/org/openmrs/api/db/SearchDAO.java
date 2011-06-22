@@ -11,6 +11,10 @@ public interface SearchDAO {
 	
 	public void closeFullTextSession();
 	
+	public void setEntity(Class entity);
+	
+	public Class getEntity();
+	
 	public void setSessionFactory(SessionFactory sessionFactory);
 	
 	public SessionFactory getSessionFactory();

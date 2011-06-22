@@ -74,7 +74,6 @@ public class HibernateSearchFullIndexingTest extends BaseContextSensitiveTest {
 		Assert.assertNotNull(result);
 	}
 	
-	@Ignore
 	@Test
 	@Verifies(value = "should find indexed existing items with param", method = "search();>,null")
 	public void search_shouldfindindexedexistingitemswithparam() {

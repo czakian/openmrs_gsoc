@@ -62,6 +62,7 @@ public class SearchController {
 		
 		String[] fields = { "names.prefix", "names.givenName", "names.familyName" };
 		// for testing, insert one object
+		Context.getSearchService().indexExistingData();
 		resultObjs.add(Context.getSearchService().search(q, Person.class, fields));
 		
 		// parse resultObjs to simple maps
