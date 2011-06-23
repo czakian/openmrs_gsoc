@@ -108,12 +108,14 @@
 				<a href='<%= request.getContextPath() %>/help.htm'><spring:message code="header.help"/></a>
 			</span>
                         
+                        <c:if test='<%= !request.getRequestURI().contains("searchResults") %>'>
                         <span id="searchBox" style="display:inline;">
-                                <form action="search.htm" method="GET" style="display:inline;">
+                                <form action="<openmrs:contextPath/>/search.htm" method="GET" style="display:inline;">
                                         <input type="text" id="searchQuery" name="q"/>
                                         <input type="submit" id="searchSubmit" name="submit" value="<spring:message code="Search.search"/>"/>
                                 </form>
                         </span>
+                        </c:if>
 		</div>
 
 		<%@ include file="/WEB-INF/template/banner.jsp" %>

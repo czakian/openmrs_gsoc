@@ -34,6 +34,12 @@ public class HibernateSearchDAO implements SearchDAO {
 	
 	protected final Log log = LogFactory.getLog(getClass());
 	
+	private FullTextSession getFullTextSession() {
+		if (fullTextSession == null)
+			this.openFullTextSession();
+		return fullTextSession;
+	}
+	
 	@Override
 	public void openFullTextSession() {
 		fullTextSession = Search.getFullTextSession(sessionFactory.getCurrentSession());
@@ -56,11 +62,8 @@ public class HibernateSearchDAO implements SearchDAO {
 	
 	@Override
 	public void indexExistingData() {
-		if (fullTextSession == null)
-			this.openFullTextSession();
-		
 		try {
-			fullTextSession.createIndexer().startAndWait();
+			this.getFullTextSession().createIndexer().startAndWait();
 		}
 		catch (InterruptedException e) {
 			log.debug(e);
@@ -93,18 +96,15 @@ public class HibernateSearchDAO implements SearchDAO {
 	
 	@Override
 	public List search(String param, Class clazz, String[] fields) {
-		if (fullTextSession == null)
-			this.openFullTextSession();
+		this.openFullTextSession();
 		
-		//not really sure why hibernate examples had this here. 
-		//but they never use it...soooo?
-		//QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(clazz).get();
 		Query query = null;
 		List result = null;
 		try {
 			query = new MultiFieldQueryParser(LUCENE_VERSION, fields, new StandardAnalyzer(LUCENE_VERSION)).parse(param);
+
 			// wrap Lucene query in a org.hibernate.Query
-			org.hibernate.Query hibQuery = fullTextSession.createFullTextQuery(query, Person.class);
+			org.hibernate.Query hibQuery = this.getFullTextSession().createFullTextQuery(query, clazz);
 			
 			// execute search
 			result = hibQuery.list();
@@ -118,10 +118,9 @@ public class HibernateSearchDAO implements SearchDAO {
 	
 	@Override
 	public List search() {
-		if (fullTextSession == null)
-			this.openFullTextSession();
+		this.openFullTextSession();
 		// wrap Lucene query in a org.hibernate.Query
-		org.hibernate.Query hibQuery = fullTextSession.createFullTextQuery((Query) getSearchParser(), getEntity());
+		org.hibernate.Query hibQuery = this.getFullTextSession().createFullTextQuery((Query) getSearchParser(), getEntity());
 		List result = hibQuery.list();
 		return result;
 	}
