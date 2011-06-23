@@ -1,0 +1,16 @@
+--- api/src/main/java/org/openmrs/api/db/hibernate/HibernateEncounterDAO.java	(revision 20359)
++++ api/src/main/java/org/openmrs/api/db/hibernate/HibernateEncounterDAO.java	(working copy)
+@@ -315,11 +315,11 @@
+ 	 * @see org.openmrs.api.db.EncounterDAO#getCountOfEncounters(java.lang.String, boolean)
+ 	 */
+ 	@Override
+-	public Integer getCountOfEncounters(String query, boolean includeVoided) {
++	public Long getCountOfEncounters(String query, boolean includeVoided) {
+ 		Criteria criteria = createEncounterByQueryCriteria(query, includeVoided);
+ 		
+ 		criteria.setProjection(Projections.rowCount());
+-		return (Integer) criteria.uniqueResult();
++		return (Long) criteria.uniqueResult();
+ 	}
+ 	
+ 	/**

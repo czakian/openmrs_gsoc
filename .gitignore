@@ -1,7 +1,8 @@
 /.settings/
-/webapp/target/
-/web/target/
 /api/target/
 /tools/target/
+/web/target/
+/webapp/target/
+/api/.settings/
 /webapp/src/main/webapp/WEB-INF/module_messages.properties
 /webapp/src/main/webapp/WEB-INF/view/module/*

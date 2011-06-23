@@ -1,19 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dwr
   PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://directwebremoting.org/schema/dwr20.dtd">
-<dwr>
-   <allow moduleId="groovy">
-            <create creator="new" javascript="DWRGroovyService">
-                <param name="class" value="org.openmrs.module.groovy.web.dwr.DWRGroovyService"/>
-                <include method="eval"/>
-            </create>
-            <convert converter="bean" match="java.lang.StackTraceElement"/>
-            <convert converter="bean" match="org.openmrs.module.groovy.GroovyScript"/>
-        </allow>
-   <signatures moduleId="groovy">
-            
-			import org.openmrs.module.groovy.web.dwr.DWRGroovyService;
-			DWRGroovyService.eval(String script);
-			
-        </signatures>
-</dwr>
+<dwr/>

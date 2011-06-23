@@ -22,11 +22,15 @@ import org.openmrs.api.search.SearchParser;
 
 public class HibernateSearchDAO implements SearchDAO {
 	
+	public static final Version LUCENE_VERSION = Version.LUCENE_31;
+	
 	private SearchParser parser;
 	
 	private SessionFactory sessionFactory;
 	
 	private FullTextSession fullTextSession;
+	
+	private Class entity;
 	
 	protected final Log log = LogFactory.getLog(getClass());
 	
@@ -94,21 +98,18 @@ public class HibernateSearchDAO implements SearchDAO {
 	public List search(String param, Class clazz, String[] fields) {
 		this.openFullTextSession();
 		
-		// QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(clazz).get();
 		Query query = null;
 		List result = null;
 		try {
-			query = new MultiFieldQueryParser(Version.LUCENE_31, fields, new StandardAnalyzer(Version.LUCENE_31))
-			        .parse(param);
+			query = new MultiFieldQueryParser(LUCENE_VERSION, fields, new StandardAnalyzer(LUCENE_VERSION)).parse(param);
+
 			// wrap Lucene query in a org.hibernate.Query
 			org.hibernate.Query hibQuery = this.getFullTextSession().createFullTextQuery(query, clazz);
 			
 			// execute search
 			result = hibQuery.list();
-			
 		}
 		catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -117,35 +118,20 @@ public class HibernateSearchDAO implements SearchDAO {
 	
 	@Override
 	public List search() {
-		Transaction tx = null;
-		List result = null;
-		
-		//question: how are transactions managed, and why can't I run one.
-		//I suspect this has to do with spring having its own transaction manager?
-		//probably should ask Jeremy about this one.
-		try {
-			//	tx = fullTextSession.beginTransaction();
-			QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(Person.class).get();
-			org.apache.lucene.search.Query query = qb.keyword().fuzzy().onField("gender").boostedTo(5).andField("personId")
-			        .matching("1 F M").createQuery();
-			
-			// wrap Lucene query in a org.hibernate.Query
-			org.hibernate.Query hibQuery = fullTextSession.createFullTextQuery(query, Person.class);
-			
-			// execute search
-			result = hibQuery.list();
-			
-			//tx.commit();
-		}
-		catch (HibernateException e) {
-			rollbackIfNeeded(tx);
-		}
+		this.openFullTextSession();
+		// wrap Lucene query in a org.hibernate.Query
+		org.hibernate.Query hibQuery = this.getFullTextSession().createFullTextQuery((Query) getSearchParser(), getEntity());
+		List result = hibQuery.list();
 		return result;
 	}
 	
-	private void rollbackIfNeeded(Transaction tx) {
-		if (tx != null && tx.isActive()) {
-			tx.rollback();
-		}
+	@Override
+	public void setEntity(Class entity) {
+		this.entity = entity;
+	}
+	
+	@Override
+	public Class getEntity() {
+		return entity;
 	}
 }

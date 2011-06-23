@@ -17,6 +17,8 @@ import java.util.Locale;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.IndexedEmbedded;
 
 /**
  * Drug
@@ -32,9 +34,10 @@ public class Drug extends BaseOpenmrsMetadata implements java.io.Serializable {
 	@Field
 	private Integer drugId;
 	
-	@Field
+	@Field(index=Index.TOKENIZED)
 	private Boolean combination = false;
 	
+	@IndexedEmbedded
 	private Concept dosageForm;
 	
 	@Field

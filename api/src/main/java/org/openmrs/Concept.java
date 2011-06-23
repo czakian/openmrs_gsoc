@@ -29,6 +29,12 @@ import java.util.Vector;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.search.annotations.ContainedIn;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
 import org.openmrs.api.APIException;
 import org.openmrs.api.ConceptNameType;
 import org.openmrs.api.ConceptService;
@@ -64,6 +70,7 @@ import org.springframework.util.ObjectUtils;
  * @see ConceptService
  */
 @Root
+@Indexed
 public class Concept extends BaseOpenmrsObject implements Auditable, Retireable, java.io.Serializable, Attributable<Concept> {
 	
 	public static final long serialVersionUID = 57332L;
@@ -72,40 +79,66 @@ public class Concept extends BaseOpenmrsObject implements Auditable, Retireable,
 	
 	// Fields
 	
+	@DocumentId
+	@Field(index=Index.TOKENIZED)
 	private Integer conceptId;
 	
+	@Field(index=Index.TOKENIZED)
 	private Boolean retired = false;
 	
+	@Field(index=Index.TOKENIZED)
 	private User retiredBy;
 	
+	@Field(index=Index.TOKENIZED)
 	private Date dateRetired;
 	
+	@Field(index=Index.TOKENIZED)
 	private String retireReason;
 	
+	@Field(index=Index.TOKENIZED)
 	private ConceptDatatype datatype;
 	
+	@Field(index=Index.TOKENIZED)
 	private ConceptClass conceptClass;
 	
+	@Field
 	private Boolean set = false;
 	
+	@Field
 	private String version;
 	
+	@Field(index=Index.TOKENIZED)
+	@IndexedEmbedded
 	private User creator;
 	
+	@Field
 	private Date dateCreated;
 	
+	@Field(index=Index.TOKENIZED)
+	@IndexedEmbedded
 	private User changedBy;
 	
+	@Field(index=Index.TOKENIZED)
 	private Date dateChanged;
 	
+	@Field(index=Index.TOKENIZED)
+	@ContainedIn
 	private Collection<ConceptName> names;
 	
+	@Field(index=Index.TOKENIZED)
+	@ContainedIn
 	private Collection<ConceptAnswer> answers;
 	
+	@Field(index=Index.TOKENIZED)
+	@ContainedIn
 	private Collection<ConceptSet> conceptSets;
 	
+	@Field(index=Index.TOKENIZED)
+	@ContainedIn
 	private Collection<ConceptDescription> descriptions;
 	
+	@Field(index=Index.TOKENIZED)
+	@ContainedIn
 	private Collection<ConceptMap> conceptMappings;
 	
 	/**
