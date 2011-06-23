@@ -80,4 +80,9 @@ public class SearchServiceImpl implements SearchService {
 	public List search() {
 		return dao.search();
 	}
+	
+	@Override
+	public List search(String param, Class clazz, String[] fields) {
+		return dao.search(param, clazz, fields);
+	}
 }

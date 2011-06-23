@@ -60,8 +60,10 @@ public class SearchController {
 		List<Object> resultObjs = new ArrayList<Object>();
 		// resultObjs = Context.getSearchService().search(q);
 		
+		String[] fields = { "names.prefix", "names.givenName", "names.familyName" };
 		// for testing, insert one object
-		resultObjs.add(Context.getPatientService().getPatient(2));
+		Context.getSearchService().indexExistingData();
+		resultObjs.add(Context.getSearchService().search(q, Person.class, fields));
 		
 		// parse resultObjs to simple maps
 		return convertResults(resultObjs);

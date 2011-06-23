@@ -20,6 +20,9 @@ import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 import org.openmrs.util.OpenmrsUtil;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
@@ -30,6 +33,7 @@ import org.simpleframework.xml.Root;
  * class, so a Person/Patient/User can have zero to n addresses
  */
 @Root(strict = false)
+@Indexed
 public class PersonAddress extends BaseOpenmrsData implements java.io.Serializable, Cloneable, Comparable<PersonAddress>, Address {
 	
 	public static final long serialVersionUID = 343333L;
@@ -38,40 +42,59 @@ public class PersonAddress extends BaseOpenmrsData implements java.io.Serializab
 	
 	// Fields
 	
+	@DocumentId
+	@Field
 	private Integer personAddressId;
 	
+	//@Field
 	private Person person;
 	
+	@Field
 	private Boolean preferred = false;
 	
+	@Field
 	private String address1;
 	
+	@Field
 	private String address2;
 	
+	@Field
 	private String cityVillage;
 	
+	@Field
 	private String address3;
 	
+	@Field
 	private String countyDistrict;
 	
+	@Field
 	private String address4;
 	
+	@Field
 	private String address6;
 	
+	@Field
 	private String address5;
 	
+	@Field
 	private String stateProvince;
 	
+	@Field
 	private String country;
 	
+	@Field
 	private String postalCode;
 	
+	@Field
 	private String latitude;
 	
+	@Field
 	private String longitude;
 	
+	@Field
 	private Date startDate;
 	
+	@Field
 	private Date endDate;
 	
 	// Constructors
