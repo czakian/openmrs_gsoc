@@ -34,7 +34,7 @@ public class Drug extends BaseOpenmrsMetadata implements java.io.Serializable {
 	@Field
 	private Integer drugId;
 	
-	@Field(index=Index.TOKENIZED)
+	@Field(index = Index.TOKENIZED)
 	private Boolean combination = false;
 	
 	@IndexedEmbedded

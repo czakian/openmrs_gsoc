@@ -80,25 +80,25 @@ public class Concept extends BaseOpenmrsObject implements Auditable, Retireable,
 	// Fields
 	
 	@DocumentId
-	@Field(index=Index.TOKENIZED)
+	@Field(index = Index.TOKENIZED)
 	private Integer conceptId;
 	
-	@Field(index=Index.TOKENIZED)
+	@Field(index = Index.TOKENIZED)
 	private Boolean retired = false;
 	
-	@Field(index=Index.TOKENIZED)
+	@Field(index = Index.TOKENIZED)
 	private User retiredBy;
 	
-	@Field(index=Index.TOKENIZED)
+	@Field(index = Index.TOKENIZED)
 	private Date dateRetired;
 	
-	@Field(index=Index.TOKENIZED)
+	@Field(index = Index.TOKENIZED)
 	private String retireReason;
 	
-	@Field(index=Index.TOKENIZED)
+	@Field(index = Index.TOKENIZED)
 	private ConceptDatatype datatype;
 	
-	@Field(index=Index.TOKENIZED)
+	@Field(index = Index.TOKENIZED)
 	private ConceptClass conceptClass;
 	
 	@Field
@@ -107,37 +107,37 @@ public class Concept extends BaseOpenmrsObject implements Auditable, Retireable,
 	@Field
 	private String version;
 	
-	@Field(index=Index.TOKENIZED)
+	@Field(index = Index.TOKENIZED)
 	@IndexedEmbedded
 	private User creator;
 	
 	@Field
 	private Date dateCreated;
 	
-	@Field(index=Index.TOKENIZED)
+	@Field(index = Index.TOKENIZED)
 	@IndexedEmbedded
 	private User changedBy;
 	
-	@Field(index=Index.TOKENIZED)
+	@Field(index = Index.TOKENIZED)
 	private Date dateChanged;
 	
-	@Field(index=Index.TOKENIZED)
+	@Field(index = Index.TOKENIZED)
 	@ContainedIn
 	private Collection<ConceptName> names;
 	
-	@Field(index=Index.TOKENIZED)
+	@Field(index = Index.TOKENIZED)
 	@ContainedIn
 	private Collection<ConceptAnswer> answers;
 	
-	@Field(index=Index.TOKENIZED)
+	@Field(index = Index.TOKENIZED)
 	@ContainedIn
 	private Collection<ConceptSet> conceptSets;
 	
-	@Field(index=Index.TOKENIZED)
+	@Field(index = Index.TOKENIZED)
 	@ContainedIn
 	private Collection<ConceptDescription> descriptions;
 	
-	@Field(index=Index.TOKENIZED)
+	@Field(index = Index.TOKENIZED)
 	@ContainedIn
 	private Collection<ConceptMap> conceptMappings;
 	

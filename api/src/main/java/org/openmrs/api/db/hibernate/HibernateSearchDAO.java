@@ -102,7 +102,7 @@ public class HibernateSearchDAO implements SearchDAO {
 		List result = null;
 		try {
 			query = new MultiFieldQueryParser(LUCENE_VERSION, fields, new StandardAnalyzer(LUCENE_VERSION)).parse(param);
-
+			
 			// wrap Lucene query in a org.hibernate.Query
 			org.hibernate.Query hibQuery = this.getFullTextSession().createFullTextQuery(query, clazz);
 			

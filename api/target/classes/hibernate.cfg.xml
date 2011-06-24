@@ -11,7 +11,7 @@
       org.hibernate.search.store.FSDirectoryProvider
     </property>
 		<property name="hibernate.search.default.indexBase"> 
-			/home/czakian/projects/java/workspace/openmrs/index/ 
+			/home/jkeiper/lucene-index/ 
 		</property>
 
 		<!--  Hibernate Mapping files -->
