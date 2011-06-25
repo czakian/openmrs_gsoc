@@ -248,7 +248,7 @@
 				<artifactId>hibernate-core</artifactId>
 				<version>3.6.5.Final-mod</version>
 				<scope>system</scope>
-				<systemPath>/home/jkeiper/.m2/repository/org/openmrs/hibernate/hibernate-core/3.6.5.Final-mod/hibernate-core-3.6.5.Final-mod.jar</systemPath>
+				<systemPath>/home/czakian/.m2/repository/org/openmrs/hibernate/hibernate-core/3.6.5.Final-mod/hibernate-core-3.6.5.Final-mod.jar</systemPath>
 				<exclusions>
 					<exclusion>
 						<groupId>commons-logging</groupId>

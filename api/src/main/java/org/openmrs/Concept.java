@@ -1,16 +1,11 @@
-/**
- * The contents of this file are subject to the OpenMRS Public License
- * Version 1.0 (the "License"); you may not use this file except in
- * compliance with the License. You may obtain a copy of the License at
- * http://license.openmrs.org
- *
- * Software distributed under the License is distributed on an "AS IS"
- * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
- * License for the specific language governing rights and limitations
- * under the License.
- *
- * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
- */
+/*
+* Software distributed under the License is distributed on an "AS IS"
+* basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+* License for the specific language governing rights and limitations
+* under the License.
+*
+* Copyright (C) OpenMRS, LLC.  All Rights Reserved.
+*/
 package org.openmrs;
 
 import java.util.Collection;
@@ -70,7 +65,6 @@ import org.springframework.util.ObjectUtils;
  * @see ConceptService
  */
 @Root
-@Indexed
 public class Concept extends BaseOpenmrsObject implements Auditable, Retireable, java.io.Serializable, Attributable<Concept> {
 	
 	public static final long serialVersionUID = 57332L;
@@ -79,66 +73,66 @@ public class Concept extends BaseOpenmrsObject implements Auditable, Retireable,
 	
 	// Fields
 	
-	@DocumentId
-	@Field(index = Index.TOKENIZED)
+	//	@DocumentId
+	//	@Field(index = Index.TOKENIZED)
 	private Integer conceptId;
 	
-	@Field(index = Index.TOKENIZED)
+	//	@Field(index = Index.TOKENIZED)
 	private Boolean retired = false;
 	
-	@Field(index = Index.TOKENIZED)
+	//	@Field(index = Index.TOKENIZED)
 	private User retiredBy;
 	
-	@Field(index = Index.TOKENIZED)
+	//	@Field(index = Index.TOKENIZED)
 	private Date dateRetired;
 	
-	@Field(index = Index.TOKENIZED)
+	//	@Field(index = Index.TOKENIZED)
 	private String retireReason;
 	
-	@Field(index = Index.TOKENIZED)
+	//	@Field(index = Index.TOKENIZED)
 	private ConceptDatatype datatype;
 	
-	@Field(index = Index.TOKENIZED)
+	//	@Field(index = Index.TOKENIZED)
 	private ConceptClass conceptClass;
 	
-	@Field
+	//	@Field
 	private Boolean set = false;
 	
-	@Field
+	//	@Field
 	private String version;
 	
-	@Field(index = Index.TOKENIZED)
-	@IndexedEmbedded
+	//	@Field(index = Index.TOKENIZED)
+	//	@IndexedEmbedded
 	private User creator;
 	
-	@Field
+	//	@Field
 	private Date dateCreated;
 	
-	@Field(index = Index.TOKENIZED)
-	@IndexedEmbedded
+	//	@Field(index = Index.TOKENIZED)
+	//	@IndexedEmbedded
 	private User changedBy;
 	
-	@Field(index = Index.TOKENIZED)
+	//	@Field(index = Index.TOKENIZED)
 	private Date dateChanged;
 	
-	@Field(index = Index.TOKENIZED)
-	@ContainedIn
+	//	@Field(index = Index.TOKENIZED)
+	//	@ContainedIn
 	private Collection<ConceptName> names;
 	
-	@Field(index = Index.TOKENIZED)
-	@ContainedIn
+	//	@Field(index = Index.TOKENIZED)
+	//	@ContainedIn
 	private Collection<ConceptAnswer> answers;
 	
-	@Field(index = Index.TOKENIZED)
-	@ContainedIn
+	//	@Field(index = Index.TOKENIZED)
+	//	@ContainedIn
 	private Collection<ConceptSet> conceptSets;
 	
-	@Field(index = Index.TOKENIZED)
-	@ContainedIn
+	//	@Field(index = Index.TOKENIZED)
+	//	@ContainedIn
 	private Collection<ConceptDescription> descriptions;
 	
-	@Field(index = Index.TOKENIZED)
-	@ContainedIn
+	//	@Field(index = Index.TOKENIZED)
+	//	@ContainedIn
 	private Collection<ConceptMap> conceptMappings;
 	
 	/**

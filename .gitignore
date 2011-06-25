@@ -6,3 +6,4 @@
 /api/.settings/
 /webapp/src/main/webapp/WEB-INF/module_messages.properties
 /webapp/src/main/webapp/WEB-INF/view/module/*
+/api/~/
