@@ -1,5 +1,7 @@
 package org.openmrs.api.search;
 
+import java.util.Map;
+import java.util.regex.Pattern;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.queryParser.QueryParser;
 
@@ -13,13 +15,8 @@ public interface SearchParser {
 	
 	public Analyzer getAnalyzer();
 	
-	/*
-	 * check to make sure a user is authorized to search
-	 * on the fields we want to parse and exclude fields
-	 * the user shouldn't see
-	 */
 	public boolean isAuthorized();
 	
-	public QueryParser parseSyntax(String searchString);
+	public QueryParser parseSyntax(String searchString, Map<Pattern, ChainedParser<String, String>> links);
 	
 }
