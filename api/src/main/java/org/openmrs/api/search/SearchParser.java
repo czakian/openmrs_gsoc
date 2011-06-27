@@ -3,20 +3,18 @@ package org.openmrs.api.search;
 import java.util.Map;
 import java.util.regex.Pattern;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.queryParser.QueryParser;
+import org.apache.lucene.search.Query;
 
 public interface SearchParser {
 	
-	public void setFields(String fields);
+	public void setFields(String[] fields);
 	
-	public void getFields();
+	public String[] getFields();
 	
 	public void setAnalyzer(Analyzer analyzer);
 	
 	public Analyzer getAnalyzer();
 	
-	public boolean isAuthorized();
-	
-	public QueryParser parseSyntax(String searchString, Map<Pattern, ChainedParser<String, String>> links);
+	public Query parseSyntax(String searchString, Map<Pattern, ChainedParser<String, String>> links);
 	
 }

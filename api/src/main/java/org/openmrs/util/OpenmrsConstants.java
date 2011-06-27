@@ -25,6 +25,7 @@ import java.util.Vector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.util.Version;
 import org.openmrs.GlobalProperty;
 import org.openmrs.api.ConceptService;
 import org.openmrs.hl7.HL7Constants;
@@ -43,6 +44,11 @@ public final class OpenmrsConstants {
 	
 	private static Log log = LogFactory.getLog(OpenmrsConstants.class);
 	
+	/**
+	 * This is the Apache Lucene version used in full text searches in concert with hibernate search
+	 */
+	public static final Version LUCENE_VERSION = Version.LUCENE_31;
+
 	/**
 	 * This is the hard coded primary key of the order type for DRUG. This has to be done because
 	 * some logic in the API acts on this order type
