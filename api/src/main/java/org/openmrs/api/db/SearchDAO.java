@@ -23,17 +23,12 @@ public interface SearchDAO {
 	
 	public void setSearchParser(SearchParser parser);
 	
-	/*
-	 * leave the option for us to make our own search parser
-	 */
 	public SearchParser getSearchParser();
-	
-	public void setSearchString(String searchString);
-	
-	public String getSearchString();
 	
 	public List search(String param, Class clazz, String[] fields);
 	
 	public List search();
+	
+	public List search(String searchString);
 	
 }

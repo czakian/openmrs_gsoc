@@ -48,7 +48,7 @@ public final class OpenmrsConstants {
 	 * This is the Apache Lucene version used in full text searches in concert with hibernate search
 	 */
 	public static final Version LUCENE_VERSION = Version.LUCENE_31;
-
+	
 	/**
 	 * This is the hard coded primary key of the order type for DRUG. This has to be done because
 	 * some logic in the API acts on this order type

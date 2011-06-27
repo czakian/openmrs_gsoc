@@ -3,6 +3,8 @@ package org.openmrs.api.db;
 import java.util.List;
 
 import junit.framework.Assert;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.util.Version;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -12,8 +14,11 @@ import org.openmrs.Person;
 import org.openmrs.PersonName;
 import org.openmrs.api.SearchService;
 import org.openmrs.api.context.Context;
+import org.openmrs.api.search.SearchParser;
+import org.openmrs.api.search.SearchParserImpl;
 import org.openmrs.test.BaseContextSensitiveTest;
 import org.openmrs.test.Verifies;
+import org.openmrs.util.OpenmrsConstants;
 
 public class HibernateSearchFullIndexingTest extends BaseContextSensitiveTest {
 	
@@ -49,29 +54,11 @@ public class HibernateSearchFullIndexingTest extends BaseContextSensitiveTest {
 	}
 	
 	@Test
-	@Verifies(value = "should find indexed items with fieldbridge", method = "search(String param);>,null")
-	public void search_shouldfindindexeditemwithfieldbridge() {
-		dao.openFullTextSession();
-		List result = dao.search("M*", Person.class, new String[] { "names.givenName", "names.prefix" });
-		for (Object s : result) {
-			if (s.getClass().equals(PersonName.class)) {
-				PersonName pname = (PersonName) s;
-				System.out.print(pname.getId() + " ");
-				System.out.print(pname.getDegree() + " ");
-				System.out.println(pname.getFullName() + " ");
-			} else if (s.getClass().equals(Patient.class)) {
-				Patient pname = (Patient) s;
-				System.out.print(pname.getId() + " ");
-				System.out.print(pname.getGivenName() + " ");
-				System.out.println(pname.getFamilyName());
-			} else if (s.getClass().equals(Person.class)) {
-				Person pname = (Person) s;
-				System.out.print(pname.getId() + " ");
-				System.out.print(pname.getGivenName() + " ");
-				System.out.println(pname.getFamilyName());
-			}
-		}
-		Assert.assertNotNull(result);
+	public void search_shouldusecustomsyntax() {
+		String searchString = "a and b";
+		SearchParser parser = new SearchParserImpl();
+		parser.setAnalyzer(new StandardAnalyzer(OpenmrsConstants.LUCENE_VERSION));
+		parser.setFields(new String[] { "names" });
 	}
 	
 	@Test

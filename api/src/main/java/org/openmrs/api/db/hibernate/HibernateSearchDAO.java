@@ -19,10 +19,9 @@ import org.hibernate.search.query.dsl.QueryBuilder;
 import org.openmrs.Person;
 import org.openmrs.api.db.SearchDAO;
 import org.openmrs.api.search.SearchParser;
+import org.openmrs.util.OpenmrsConstants;
 
 public class HibernateSearchDAO implements SearchDAO {
-	
-	public static final Version LUCENE_VERSION = Version.LUCENE_31;
 	
 	private SearchParser parser;
 	
@@ -30,9 +29,9 @@ public class HibernateSearchDAO implements SearchDAO {
 	
 	private FullTextSession fullTextSession;
 	
-	private Class entity;
-	
 	protected final Log log = LogFactory.getLog(getClass());
+	
+	private Class entity;
 	
 	private FullTextSession getFullTextSession() {
 		if (fullTextSession == null)
@@ -72,26 +71,12 @@ public class HibernateSearchDAO implements SearchDAO {
 	
 	@Override
 	public void setSearchParser(SearchParser parser) {
-		// TODO Auto-generated method stub
-		
+		this.parser = parser;
 	}
 	
 	@Override
 	public SearchParser getSearchParser() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public void setSearchString(String searchString) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public String getSearchString() {
-		// TODO Auto-generated method stub
-		return null;
+		return parser;
 	}
 	
 	@Override
@@ -101,7 +86,8 @@ public class HibernateSearchDAO implements SearchDAO {
 		Query query = null;
 		List result = null;
 		try {
-			query = new MultiFieldQueryParser(LUCENE_VERSION, fields, new StandardAnalyzer(LUCENE_VERSION)).parse(param);
+			query = new MultiFieldQueryParser(OpenmrsConstants.LUCENE_VERSION, fields, new StandardAnalyzer(
+			        OpenmrsConstants.LUCENE_VERSION)).parse(param);
 			
 			// wrap Lucene query in a org.hibernate.Query
 			org.hibernate.Query hibQuery = this.getFullTextSession().createFullTextQuery(query, clazz);
@@ -114,6 +100,13 @@ public class HibernateSearchDAO implements SearchDAO {
 		}
 		
 		return result;
+	}
+	
+	public List search(String searchString) {
+		if (fullTextSession == null)
+			this.openFullTextSession();
+		
+		return this.getFullTextSession().createFullTextQuery(parser.parse(searchString), entity).list();
 	}
 	
 	@Override

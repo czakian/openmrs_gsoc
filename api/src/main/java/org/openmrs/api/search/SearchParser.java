@@ -15,6 +15,8 @@ public interface SearchParser {
 	
 	public Analyzer getAnalyzer();
 	
-	public Query parseSyntax(String searchString, Map<Pattern, ChainedParser<String, String>> links);
+	public String parseSyntax(String searchString, Map<Pattern, ChainedParser<String, String>> links);
+	
+	public Query parse(String searchString);
 	
 }
