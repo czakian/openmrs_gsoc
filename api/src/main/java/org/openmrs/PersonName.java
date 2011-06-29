@@ -45,6 +45,7 @@ public class PersonName extends BaseOpenmrsData implements java.io.Serializable,
 	// Fields
 	
 	@Field
+	@ContainedIn
 	private Integer personNameId;
 	
 	//	@IndexedEmbedded
@@ -57,7 +58,6 @@ public class PersonName extends BaseOpenmrsData implements java.io.Serializable,
 	private String prefix;
 	
 	@Field(index = Index.TOKENIZED)
-	@ContainedIn
 	private String givenName;
 	
 	@Field(index = Index.TOKENIZED)

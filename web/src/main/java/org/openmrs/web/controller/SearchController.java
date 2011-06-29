@@ -46,6 +46,7 @@ public class SearchController {
 	@RequestMapping(value = "/search.htm")
 	public String search(ModelMap modelMap, @RequestParam("q") String q) {
 		modelMap.addAttribute("q", q);
+		Context.getSearchService().indexExistingData();
 		return "searchResults";
 	}
 	

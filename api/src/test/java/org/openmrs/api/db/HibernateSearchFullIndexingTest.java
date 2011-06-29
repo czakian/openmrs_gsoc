@@ -1,19 +1,23 @@
 package org.openmrs.api.db;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import junit.framework.Assert;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.util.Version;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanClause.Occur;
 
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.openmrs.Patient;
 import org.openmrs.Person;
-import org.openmrs.PersonName;
 import org.openmrs.api.SearchService;
 import org.openmrs.api.context.Context;
+import org.openmrs.api.search.ChainedParser;
+import org.openmrs.api.search.ParseAND;
+import org.openmrs.api.search.ParseOR;
 import org.openmrs.api.search.SearchParser;
 import org.openmrs.api.search.SearchParserImpl;
 import org.openmrs.test.BaseContextSensitiveTest;
@@ -43,6 +47,7 @@ public class HibernateSearchFullIndexingTest extends BaseContextSensitiveTest {
 			sService = Context.getSearchService();
 	}
 	
+	@Ignore
 	@Test
 	@Verifies(value = "should index existing data", method = "indexExistingData();>,null")
 	public void indexExistingData_shouldindexexistingdata() {
@@ -55,17 +60,42 @@ public class HibernateSearchFullIndexingTest extends BaseContextSensitiveTest {
 	
 	@Test
 	public void search_shouldusecustomsyntax() {
-		String searchString = "a and b";
+		String searchString = "Hipp* and H*";
+		Class entity = Person.class;
+		String[] fields = new String[] {"gender", "names.familyName", "names.givenName"};
+		Occur[] flags = new Occur[] { Occur.SHOULD, Occur.SHOULD, Occur.SHOULD};
+			
 		SearchParser parser = new SearchParserImpl();
 		parser.setAnalyzer(new StandardAnalyzer(OpenmrsConstants.LUCENE_VERSION));
-		parser.setFields(new String[] { "names" });
+		parser.setFields(fields);
+		parser.setFlags(flags);
+
+		parser.setSyntax(new HashMap<Pattern,ChainedParser<String,String>>());
+		parser.addSyntax(Pattern.compile(".*\\sor\\s.*"), new ParseOR());
+		parser.addSyntax(Pattern.compile(".*\\sand\\s.*"), new ParseAND());
+
+		dao.setSearchParser(parser);
+		dao.setEntity(entity);
+		List results = dao.search(searchString);
+
+	for (Object s : results) {
+			Person p = (Person) s;
+			System.out.print(p.getId() + " ");
+			System.out.print(p.getGender() + " ");
+			System.out.print(p.getGivenName() + " ");
+			System.out.println(p.getAge());
+		}	
+		
+	//Assert.assertEquals(dao.search(searchString, entity, fields), results);
+		
 	}
 	
+	@Ignore
 	@Test
 	@Verifies(value = "should find indexed existing items with param", method = "search();>,null")
 	public void search_shouldfindindexedexistingitemswithparam() {
 		dao.openFullTextSession();
-		List result = dao.search("Anet", Person.class, new String[] { "names" });
+		List result = dao.search("M", Person.class, new String[] { "gender" });
 		for (Object s : result) {
 			Person p = (Person) s;
 			System.out.print(p.getId() + " ");

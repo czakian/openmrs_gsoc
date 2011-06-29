@@ -27,12 +27,14 @@ public interface SearchService extends OpenmrsService {
 	
 	public SearchParser getSearchParser();
 	
-	public void setSearchString(String searchString);
+	//public void setSearchString(String searchString);
 	
-	public String getSearchString();
+	//	public String getSearchString();
 	
 	//@Transactional
 	public List search();
+	
+	public List search(String searchString);
 	
 	public List search(String param, Class clazz, String[] fields);
 	

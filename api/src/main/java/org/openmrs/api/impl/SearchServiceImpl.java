@@ -66,19 +66,24 @@ public class SearchServiceImpl implements SearchService {
 		return dao.getSearchParser();
 	}
 	
-	@Override
-	public void setSearchString(String searchString) {
-		dao.setSearchString(searchString);
-	}
-	
-	@Override
-	public String getSearchString() {
-		return dao.getSearchString();
-	}
+	//	@Override
+	//	public void setSearchString(String searchString) {
+	//		dao.setSearchString(searchString);
+	//	}
+	//	
+	//	@Override
+	//	public String getSearchString() {
+	//		return dao.getSearchString();
+	//	}
 	
 	@Override
 	public List search() {
 		return dao.search();
+	}
+	
+	@Override
+	public List search(String searchString) {
+		return dao.search(searchString);
 	}
 	
 	@Override
